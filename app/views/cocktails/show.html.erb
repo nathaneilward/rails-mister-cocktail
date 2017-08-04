@@ -1,16 +1,16 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-sm-6 col-sm-offset">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
       <h1><%= @cocktail.name %></h1>
-
-      <h2><% @cocktail.doses.each do |dose| %></h2>
-      <%= dose.description %>
-      <%= dose.ingredient.name %>
+      <% @cocktail.doses.each do |dose| %>
+      <p><strong>Dose: </strong><%= dose.description %></p>
+      <p><strong>Ingredients: </strong><%= dose.ingredient.name %></p>
       <%= link_to "Delete dose", dose_path(dose),
       method: :delete,
       data: { confirm: "Are you sure?" } %>
       <% end %>
 
+      <h3>Add a dose and ingredient</h3>
       <%= simple_form_for([@cocktail, @dose]) do |f| %>
       <%= f.input :description %>
       <%= f.input :ingredient_id, collection: @ingredients %>
